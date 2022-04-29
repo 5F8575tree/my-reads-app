@@ -1,6 +1,7 @@
 {
   "name": "nd0191-myreads-starter",
   "version": "0.1.0",
+  "description": "A starter project for myreads",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
