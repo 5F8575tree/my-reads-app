@@ -30,7 +30,7 @@ function App() {
         </div>
       ) : (
         <div className="list-books">
-          <Title></Title>
+          <Title />
           <div className="list-books-content">
             <div>
               <div className="bookshelf">
@@ -76,7 +76,7 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
+          </div>>
           <div className="open-search">
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
           </div>
