@@ -6,7 +6,6 @@ const SearchBooks = () => {
           <div className="search-books-bar">
             <a
               className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
             >
               Close
             </a>

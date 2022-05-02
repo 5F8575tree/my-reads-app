@@ -8,6 +8,8 @@ const Home = () => {
         <div className="list-books">
             <Title />
             <Bookshelf />
+            <Bookshelf />
+            <Bookshelf />
             <SearchButton />
         </div>
     );
