@@ -4,12 +4,13 @@ import Bookshelf from "./Bookshelf";
 import SearchButton from "./SearchButton";
 
 const Home = () => {
+
     return (
         <div className="list-books">
             <Title />
-            <Bookshelf />
-            <Bookshelf />
-            <Bookshelf />
+            <Bookshelf title="Currently Reading"/>
+            <Bookshelf title="Want to Read"/>
+            <Bookshelf title="Read"/>
             <SearchButton />
         </div>
     );
