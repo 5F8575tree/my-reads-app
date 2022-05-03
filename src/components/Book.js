@@ -1,7 +1,7 @@
 import React from "react";
 import BookshelfChanger from "./BookshelfChanger";
 
-const Book = ({ Books }) => {
+const Book = ({ Books, changeShelf }) => {
 
   return (
     <li>
@@ -16,7 +16,7 @@ const Book = ({ Books }) => {
                      `url(${Books.url})`
                   }}
                   ></div>
-                  <BookshelfChanger Books={Books}/>
+                  <BookshelfChanger Books={Books} changeShelf={changeShelf}/>
             </div>
             <div className="book-title">{Books.title}</div>
             <div className="book-authors">{Books.authors}</div>
