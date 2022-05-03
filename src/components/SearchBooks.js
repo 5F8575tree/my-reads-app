@@ -1,6 +1,20 @@
 import React from 'react';
+import * as BooksAPI from "../services/BooksAPI";
+import { useState } from "react";
+
 
 const SearchBooks = () => {
+
+  //we need to set the query state to an empty string
+  const [query, setQuery] = useState('');
+
+  let handleChange = async (e) => {
+    setQuery(e.target.value);
+    BooksAPI.search(e.target.value, 20).then((books) => {
+      console.log(books);
+    });
+  };
+
     return (
         <div className="search-books">
           <div className="search-books-bar">
@@ -13,6 +27,8 @@ const SearchBooks = () => {
               <input
                 type="text"
                 placeholder="Search by title, author, or ISBN"
+                onChange={handleChange}
+                value={query}
               />
             </div>
           </div>

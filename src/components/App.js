@@ -2,6 +2,7 @@ import "../styles/App.css";
 import { useState, useEffect } from "react";
 import BookStateTable from "./BookStateTable";
 import * as BooksAPI from "../services/BooksAPI";
+import SearchBooks from "./SearchBooks";
 
 //TODO: build out the custom hook to replace the changeShelf props that run all the way down.
 
@@ -30,6 +31,15 @@ const App = () => {
     BooksAPI.update(book, shelf);
   };
 
+  //we need a function that just consolge logs the data that returns from the BooksAPI.search()
+  const searchBooks = (query) => {
+    BooksAPI.search(query, 20).then((books) => {
+      console.log(books);
+    });
+    searchBooks(query);
+  };
+
+
 
   return (
     <div className="app">
@@ -42,7 +52,7 @@ const App = () => {
           </div>
           <BookStateTable Books={Books} changeShelf={changeShelf}/>
           <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
+            <button onClick={() => setShowSearchpage(true)}>Add a book</button>
           </div>
         </div>
       )}
