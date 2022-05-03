@@ -1,13 +1,16 @@
 import React from "react";
 import Bookshelf from "./Bookshelf";
 
-const BookStateTable = () => {
+const BookStateTable = ({ Books }) => {
+
+    console.log({Books});
+
     return (
         <div className="list-books-content">
             <div>
-              <Bookshelf />
-              <Bookshelf />
-              <Bookshelf />
+                <Bookshelf Books={Books} />
+                <Bookshelf Books={Books} />
+                <Bookshelf Books={Books} />
             </div>
         </div>
     )
