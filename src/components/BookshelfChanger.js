@@ -1,14 +1,13 @@
 import React from 'react';
-import useChangeShelf from './useChangeShelf';
 
-const BookshelfChanger = ({ Books}) => {
+const BookshelfChanger = ({ Books, changeShelf }) => {
 
     //we need to pass the book shelf to the BookshelfChanger component
     const bookShelf = Books.shelf;
 
     return (
         <div className="book-shelf-changer">
-            <select defaultValue={bookShelf} onChange={useChangeShelf()}>
+            <select defaultValue={bookShelf} onChange={(e) => changeShelf(Books, e.target.value)}>
                 <option value="none" disabled>
                     Move to...
                 </option>

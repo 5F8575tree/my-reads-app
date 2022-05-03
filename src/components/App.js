@@ -1,7 +1,6 @@
 import "../styles/App.css";
 import { useState } from "react";
 import BookStateTable from "./BookStateTable";
-import useChangeShelf from "./useChangeShelf";
 
 const App = () => {
 
@@ -40,7 +39,18 @@ const App = () => {
 
   const [showSearchPage, setShowSearchpage] = useState(false);
 
-  const [Books, setBooks] = useChangeShelf(testBooks);
+  const [Books, setBooks] = useState(testBooks);
+
+  //we need a function to change the shelf status of a book
+  const changeShelf = (book, shelf) => {
+    const newShelf = Books.map((b) => {
+      if (b.title === book.title) {
+        b.shelf = shelf;
+      }
+      return b;
+    });
+    setBooks(newShelf);
+  };
 
 
   return (
@@ -52,7 +62,7 @@ const App = () => {
           <div className="list-books-title">
             <h1>MyReads</h1>
           </div>
-          <BookStateTable Books={Books} />
+          <BookStateTable Books={Books} changeShelf={changeShelf}/>
           <div className="open-search">
             <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
           </div>
