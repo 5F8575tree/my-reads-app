@@ -4,7 +4,7 @@ import BookshelfChanger from "./BookshelfChanger";
 const Book = ({ Books }) => {
 
   return (
-    <li>
+    <li key={Books.id}>
         <div className="book">
             <div className="book-top">
                 <div
