@@ -3,8 +3,6 @@ import Bookshelf from "./Bookshelf";
 
 const BookStateTable = ({ Books }) => {
 
-    console.log({Books});
-
     const currentlyReading = Books.filter((book) => book.shelf === "currentlyReading");
     const wantToRead = Books.filter((book) => book.shelf === "wantToRead");
     const read = Books.filter((book) => book.shelf === "read");
