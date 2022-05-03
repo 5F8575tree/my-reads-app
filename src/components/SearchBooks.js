@@ -1,6 +1,7 @@
 import React from 'react';
 import * as BooksAPI from "../services/BooksAPI";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const SearchBooks = () => {
@@ -8,21 +9,29 @@ const SearchBooks = () => {
   //we need to set the query state to an empty string
   const [query, setQuery] = useState('');
 
+  const [books, setBooks] = useState([]);
+
   let handleChange = async (e) => {
     setQuery(e.target.value);
     BooksAPI.search(e.target.value, 20).then((books) => {
-      console.log(books);
+      //we need an if statement to check if the books are empty
+      if (books.length === 0) {
+        setBooks([]);
+      } else {
+        setBooks(books);
+      }
     });
   };
+
 
     return (
         <div className="search-books">
           <div className="search-books-bar">
-            <a
+            <Link to="/"
               className="close-search"
             >
               Close
-            </a>
+            </Link>
             <div className="search-books-input-wrapper">
               <input
                 type="text"
@@ -33,10 +42,40 @@ const SearchBooks = () => {
             </div>
           </div>
           <div className="search-books-results">
-            <ol className="books-grid"></ol>
+            <ol className="books-grid">
+              {books.map((book) => (
+                <li key={book.id}>
+                  <div className="book">
+                    <div className="book-top">
+                      <div
+                        className="book-cover"
+                        style={{
+                          width: 128,
+                          height: 193,
+                          backgroundImage: `url(${book.imageLinks.thumbnail})`,
+                        }}
+                      />
+                      <div className="book-shelf-changer">
+                        <select>
+                          <option value="move" disabled>
+                            Move to...
+                          </option>
+                          <option value="currentlyReading">Currently Reading</option>
+                          <option value="wantToRead">Want to Read</option>
+                          <option value="read">Read</option>
+                          <option value="none">None</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="book-title">{book.title}</div>
+                    <div className="book-authors">{book.authors}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
-    )
+      );
 }
 
 export default SearchBooks;

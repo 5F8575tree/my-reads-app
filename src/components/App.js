@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import BookStateTable from "./BookStateTable";
 import * as BooksAPI from "../services/BooksAPI";
 import SearchBooks from "./SearchBooks";
+import Title from "./Title";
 
 //TODO: build out the custom hook to replace the changeShelf props that run all the way down.
 
@@ -47,9 +48,7 @@ const App = () => {
         <SearchBooks />
       ) : (
         <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
+          <Title />
           <BookStateTable Books={Books} changeShelf={changeShelf}/>
           <div className="open-search">
             <button onClick={() => setShowSearchpage(true)}>Add a book</button>
