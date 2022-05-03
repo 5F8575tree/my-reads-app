@@ -13,7 +13,7 @@ const Book = ({ Books, changeShelf }) => {
                      width: 128,
                      height: 193,
                      backgroundImage:
-                     `url(${Books.url})`
+                     `url(${Books.imageLinks.thumbnail})`,
                   }}
                   ></div>
                   <BookshelfChanger Books={Books} changeShelf={changeShelf}/>
