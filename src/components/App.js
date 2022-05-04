@@ -5,10 +5,7 @@ import SearchBooks from "../views/SearchBooks";
 import Home from "../views/Home";
 import { Routes, Route } from "react-router-dom";
 
-
 //TODO: build out the custom hook to replace the changeShelf props that run all the way down.
-//TODO: Figure out state - at the moment the page requires refreshing to see the changes.
-
 
 const App = () => {
 
