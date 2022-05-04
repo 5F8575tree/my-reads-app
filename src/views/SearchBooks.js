@@ -3,7 +3,7 @@ import * as BooksAPI from "../services/BooksAPI";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SearchBooks = ({ changeShelf }) => {
+const SearchBooks = ({ updateShelf }) => {
 
   //we need to set the query state to an empty string
   const [query, setQuery] = useState('');
@@ -11,6 +11,7 @@ const SearchBooks = ({ changeShelf }) => {
   const [books, setBooks] = useState([]);
 
   let handleChange = async (e) => {
+    e.preventDefault();
     setQuery(e.target.value);
     BooksAPI.search(e.target.value, 20).then((books) => {
       //we need an if statement to check if the books are empty
@@ -58,7 +59,7 @@ const SearchBooks = ({ changeShelf }) => {
                         }}
                       />
                       <div className="book-shelf-changer">
-                          <select defaultValue={book.shelf} onChange={(e) => changeShelf(book, e.target.value)}>
+                          <select defaultValue={book.shelf} onChange={(e) => updateShelf(book, e.target.value)}>
                               <option value="none" disabled>
                                   Move to...
                               </option>

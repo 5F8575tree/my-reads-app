@@ -1,7 +1,7 @@
 import "../styles/App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import * as BooksAPI from "../services/BooksAPI";
-import SearchBooks from "./SearchBooks";
+import SearchBooks from "../views/SearchBooks";
 import Home from "../views/Home";
 import { Routes, Route } from "react-router-dom";
 
@@ -14,31 +14,30 @@ const App = () => {
 
   const [Books, setBooks] = useState([]);
 
-  //we need a function to change the shelf status of a book
-  const changeShelf = (book, shelf) => {
-    const newShelf = Books.map((b) => {
-      if (b.title === book.title) {
-        b.shelf = shelf;
-      }
-      return b;
-    });
-    setBooks(newShelf);
-    BooksAPI.update(book, shelf);
-  };
+  const updateShelf = useCallback((book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      setBooks(Books.map(b => b.id === book.id ? { ...book, shelf } : b));
+    }
+    );
+  }, [Books]);
 
+
+  //we need to use the BooksAPI to getAll() the books within a useEffect
   useEffect(() => {
-    BooksAPI.getAll().then((books) => {
-      setBooks(books);
-    });
-  }, []);
+      BooksAPI.getAll().then((books) => {
+          setBooks(books);
+      }
+      );
+  }, [updateShelf]);
+
 
   return (
     <Routes>
       <Route exact path="/" element={
-        <Home Books={Books} changeShelf={changeShelf} />
+        <Home Books={Books} updateShelf={updateShelf} />
       } />
       <Route path="/search" element={
-        <SearchBooks changeShelf={changeShelf} />}
+        <SearchBooks updateShelf={updateShelf} />}
         />
     </Routes>
   );
