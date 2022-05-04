@@ -3,8 +3,7 @@ import * as BooksAPI from "../services/BooksAPI";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
-const SearchBooks = ({ Books, changeShelf }) => {
+const SearchBooks = ({ changeShelf }) => {
 
   //we need to set the query state to an empty string
   const [query, setQuery] = useState('');
@@ -22,7 +21,6 @@ const SearchBooks = ({ Books, changeShelf }) => {
       }
     });
   };
-
 
     return (
         <div className="search-books">
@@ -43,7 +41,7 @@ const SearchBooks = ({ Books, changeShelf }) => {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              {books.map((book) => (
+              {books.length > 0 && books.map((book) => (
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
@@ -60,19 +58,22 @@ const SearchBooks = ({ Books, changeShelf }) => {
                         }}
                       />
                       <div className="book-shelf-changer">
-                        <select onChange={(e) => changeShelf(Books, e.target.value)}>
-                          <option value="move" disabled>
-                            Move to...
-                          </option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                          <option value="none">None</option>
-                        </select>
+                          <select defaultValue={book.shelf} onChange={(e) => changeShelf(book, e.target.value)}>
+                              <option value="none" disabled>
+                                  Move to...
+                              </option>
+                              <option value="currentlyReading">
+                                  Currently Reading
+                              </option>
+                              <option value="wantToRead">Want to Read</option>
+                              <option value="read">Read</option>
+                              <option value="none">None</option>
+                          </select>
                       </div>
                     </div>
                     <div className="book-title">{book.title}</div>
-                    <div className="book-authors">{book.authors}</div>
+                    <div className="book-authors">
+                      {book.authors ? book.authors : ""}</div>
                   </div>
                 </li>
               ))}

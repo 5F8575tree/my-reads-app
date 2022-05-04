@@ -1,24 +1,16 @@
 import "../styles/App.css";
 import { useState, useEffect } from "react";
-import BookStateTable from "./BookStateTable";
 import * as BooksAPI from "../services/BooksAPI";
 import SearchBooks from "./SearchBooks";
-import Title from "./Title";
+import Home from "../views/Home";
 import { Routes, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 
 //TODO: build out the custom hook to replace the changeShelf props that run all the way down.
+//TODO: Figure out state - at the moment the page requires refreshing to see the changes.
 
 
 const App = () => {
-
-  useEffect(() => {
-    BooksAPI.getAll().then((books) => {
-      setBooks(books);
-    });
-  }, []);
-
-  const [showSearchPage, setShowSearchpage] = useState(false);
 
   const [Books, setBooks] = useState([]);
 
@@ -34,20 +26,19 @@ const App = () => {
     BooksAPI.update(book, shelf);
   };
 
+  useEffect(() => {
+    BooksAPI.getAll().then((books) => {
+      setBooks(books);
+    });
+  }, []);
 
   return (
     <Routes>
       <Route exact path="/" element={
-        <div className="list-books">
-          <Title />
-          <BookStateTable Books={Books} changeShelf={changeShelf} />
-          <div className="open-search">
-            <Link to="/search" className="link-button" onClick={setShowSearchpage}>Add a book</Link>
-          </div>
-        </div>
+        <Home Books={Books} changeShelf={changeShelf} />
       } />
       <Route path="/search" element={
-        <SearchBooks Books={Books} changeShelf={changeShelf} />}
+        <SearchBooks changeShelf={changeShelf} />}
         />
     </Routes>
   );
