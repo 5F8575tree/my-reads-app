@@ -4,6 +4,8 @@ import BookStateTable from "./BookStateTable";
 import * as BooksAPI from "../services/BooksAPI";
 import SearchBooks from "./SearchBooks";
 import Title from "./Title";
+import { Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //TODO: build out the custom hook to replace the changeShelf props that run all the way down.
 
@@ -32,31 +34,23 @@ const App = () => {
     BooksAPI.update(book, shelf);
   };
 
-  //we need a function that just consolge logs the data that returns from the BooksAPI.search()
-  const searchBooks = (query) => {
-    BooksAPI.search(query, 20).then((books) => {
-      console.log(books);
-    });
-    searchBooks(query);
-  };
-
-
 
   return (
-    <div className="app">
-      {showSearchPage ? (
-        <SearchBooks />
-      ) : (
+    <Routes>
+      <Route exact path="/" element={
         <div className="list-books">
           <Title />
-          <BookStateTable Books={Books} changeShelf={changeShelf}/>
+          <BookStateTable Books={Books} changeShelf={changeShelf} />
           <div className="open-search">
-            <button onClick={() => setShowSearchpage(true)}>Add a book</button>
+            <Link to="/search" className="link-button" onClick={setShowSearchpage}>Add a book</Link>
           </div>
         </div>
-      )}
-    </div>
+      } />
+      <Route path="/search" element={
+        <SearchBooks Books={Books} changeShelf={changeShelf} />}
+        />
+    </Routes>
   );
-}
+};
 
 export default App;

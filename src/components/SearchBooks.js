@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-const SearchBooks = () => {
+const SearchBooks = ({ Books, changeShelf }) => {
 
   //we need to set the query state to an empty string
   const [query, setQuery] = useState('');
@@ -52,11 +52,15 @@ const SearchBooks = () => {
                         style={{
                           width: 128,
                           height: 193,
-                          backgroundImage: `url(${book.imageLinks.thumbnail})`,
+                          backgroundImage: `url(${
+                            book.imageLinks
+                              ? book.imageLinks.thumbnail
+                              : ""
+                          })`
                         }}
                       />
                       <div className="book-shelf-changer">
-                        <select>
+                        <select onChange={(e) => changeShelf(Books, e.target.value)}>
                           <option value="move" disabled>
                             Move to...
                           </option>

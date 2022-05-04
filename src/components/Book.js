@@ -5,7 +5,7 @@ const Book = ({ Books, changeShelf }) => {
 
   return (
     <li>
-        <div className="book" key={Books.id}>
+        <div className="book">
             <div className="book-top">
                 <div
                     className="book-cover"
