@@ -15,24 +15,29 @@ const SearchBooks = ({ updateShelf }) => {
     //if the query is empty prevent the API call
     if (query === '') {
       setBooks([]);
-      return;
+      return
     }
     //if the query is not empty, run the API call
     BooksAPI.search(query).then((books) => {
-      setBooks(books);
-      console.log(query);
-      console.log(books);
+      //if the search returns an error, set the books to an empty array
+      if (books.error) {
+        setBooks([]);
+      } else {
+        //if the search returns books, set the books state to the books array
+        setBooks(books);
+        console.log(books);
+        console.log(books.authors.toString().toLowerCase());
+      }
     }
     );
   }
 
-
   const searchResults =
-  query === ""
-  ? []
-  : books.filter((b) => b.title.toLowerCase().includes(query.toLowerCase())
-  );
+    query === ""
+    ? []
+    : books.filter((b) => (b.title.toLowerCase().includes(query.toLowerCase())))
 
+    // || (b.authors.toString().toLowerCase().includes(query.toLowerCase())));
 
     return (
         <div className="search-books">
