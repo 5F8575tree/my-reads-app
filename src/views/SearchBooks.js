@@ -10,18 +10,29 @@ const SearchBooks = ({ updateShelf }) => {
 
   const [books, setBooks] = useState([]);
 
-  let handleChange = async (e) => {
-    e.preventDefault();
-    setQuery(e.target.value);
-    BooksAPI.search(e.target.value, 20).then((books) => {
-      //we need an if statement to check if the books are empty
-      if (books.length === 0) {
-        setBooks([]);
-      } else {
-        setBooks(books);
-      }
-    });
-  };
+  const handleChange = (query) => {
+    setQuery(query.trim());
+    //if the query is empty prevent the API call
+    if (query === '') {
+      setBooks([]);
+      return;
+    }
+    //if the query is not empty, run the API call
+    BooksAPI.search(query).then((books) => {
+      setBooks(books);
+      console.log(query);
+      console.log(books);
+    }
+    );
+  }
+
+
+  const searchResults =
+  query === ""
+  ? []
+  : books.filter((b) => b.title.toLowerCase().includes(query.toLowerCase())
+  );
+
 
     return (
         <div className="search-books">
@@ -34,15 +45,15 @@ const SearchBooks = ({ updateShelf }) => {
             <div className="search-books-input-wrapper">
               <input
                 type="text"
-                placeholder="Search by title, author, or ISBN"
-                onChange={handleChange}
+                placeholder="Search by title or author"
+                onChange={(event) => handleChange(event.target.value)}
                 value={query}
               />
             </div>
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              {books.length > 0 && books.map((book) => (
+              {searchResults.map((book) => (
                 <li key={book.id}>
                   <div className="book">
                     <div className="book-top">
