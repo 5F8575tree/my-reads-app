@@ -10,8 +10,21 @@ const SearchBooks = ({ updateShelf }) => {
 
   const [books, setBooks] = useState([]);
 
+  //we need a function that checks if the search book is already on a shelf in BooksAPI.getAll()
+  const checkShelf = (book) => {
+    BooksAPI.getAll(book.id).then((book) => {
+      if (book.shelf) {
+        setBooks(books.map(b => b.id === book.id ? { ...book, shelf: book.shelf } : b));
+      } else {
+        setBooks(books.map(b => b.id === book.id ? { ...book, shelf: 'none' } : b));
+      }
+    }
+    );
+  }
+
+
   const handleChange = (query) => {
-    setQuery(query.trim());
+    setQuery(query);
     //if the query is empty prevent the API call
     if (query === '') {
       setBooks([]);
@@ -22,11 +35,11 @@ const SearchBooks = ({ updateShelf }) => {
       //if the search returns an error, set the books to an empty array
       if (books.error) {
         setBooks([]);
+        return
       } else {
         //if the search returns books, set the books state to the books array
         setBooks(books);
-        console.log(books);
-        console.log(books.authors.toString().toLowerCase());
+        // console.log(books.map(book => book.authors.toString().toLowerCase().includes(query.toLowerCase())));
       }
     }
     );
@@ -75,7 +88,7 @@ const SearchBooks = ({ updateShelf }) => {
                         }}
                       />
                       <div className="book-shelf-changer">
-                          <select defaultValue={book.shelf} onChange={(e) => updateShelf(book, e.target.value)}>
+                        <select defaultValue={checkShelf} onChange={(e) => updateShelf(book, e.target.value)}>
                               <option value="none" disabled>
                                   Move to...
                               </option>
