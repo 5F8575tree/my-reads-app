@@ -3,25 +3,29 @@ import * as BooksAPI from "../services/BooksAPI";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SearchBooks = ({ updateShelf }) => {
+const SearchBooks = ({ Books, updateShelf }) => {
 
   //we need to set the query state to an empty string
   const [query, setQuery] = useState('');
 
   const [books, setBooks] = useState([]);
 
+  const [ booksProps, setBooksProps ] = useState(Books);
+
   //we need a function that checks if the search book is already on a shelf in BooksAPI.getAll()
   const checkShelf = (book) => {
-    BooksAPI.getAll(book.id).then((book) => {
-      if (book.shelf) {
-        setBooks(books.map(b => b.id === book.id ? { ...book, shelf: book.shelf } : b));
-      } else {
-        setBooks(books.map(b => b.id === book.id ? { ...book, shelf: 'none' } : b));
+    let shelf = '';
+    BooksAPI.getAll().then((books) => {
+      books.forEach((b) => {
+        if (b.id === book.id) {
+          shelf = b.shelf;
+        }
       }
+      );
+      setBooksProps(booksProps.map(b => b.id === book.id ? { ...book, shelf } : b));
     }
     );
   }
-
 
   const handleChange = (query) => {
     setQuery(query);

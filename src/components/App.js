@@ -34,7 +34,7 @@ const App = () => {
         <Home Books={Books} updateShelf={updateShelf} />
       } />
       <Route path="/search" element={
-        <SearchBooks updateShelf={updateShelf} />}
+        <SearchBooks Books={Books} updateShelf={updateShelf} />}
         />
     </Routes>
   );
