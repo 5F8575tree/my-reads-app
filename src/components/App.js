@@ -5,8 +5,6 @@ import SearchBooks from "../views/SearchBooks";
 import Home from "../views/Home";
 import { Routes, Route } from "react-router-dom";
 
-//TODO: build out the custom hook to replace the changeShelf props that run all the way down.
-
 const App = () => {
   const [Books, setBooks] = useState([]);
 
