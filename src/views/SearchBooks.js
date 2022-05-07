@@ -33,10 +33,8 @@ const SearchBooks = ({ Books, updateShelf }) => {
   const searchResults =
     query === ""
       ? []
-      : books.filter(
-          (b) =>
-            b.title.toLowerCase().includes(query.toLowerCase()) ||
-            b.authors.toString().toLowerCase().includes(query.toLowerCase())
+      : books.filter((b) =>
+          b.title.toLowerCase().includes(query.toLowerCase())
         );
 
   const updateBooks = (book, e) => {

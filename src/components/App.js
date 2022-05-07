@@ -17,6 +17,7 @@ const App = () => {
         setBooks(Books.filter((b) => b.id !== book.id));
       }
     });
+    // eslint-disable-next-line
   }, []);
 
   //we need to use the BooksAPI to getAll() the books within a useEffect
