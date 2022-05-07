@@ -9,23 +9,6 @@ const SearchBooks = ({ Books, updateShelf }) => {
 
   const [books, setBooks] = useState([]);
 
-  const [booksProps, setBooksProps] = useState(Books);
-
-  //we need a function that checks if the search book is already on a shelf in BooksAPI.getAll()
-  const checkShelf = (book) => {
-    let shelf = "";
-    BooksAPI.getAll().then((books) => {
-      books.forEach((b) => {
-        if (b.id === book.id) {
-          shelf = b.shelf;
-        }
-      });
-      setBooksProps(
-        booksProps.map((b) => (b.id === book.id ? { ...book, shelf } : b))
-      );
-    });
-  };
-
   const handleChange = (query) => {
     setQuery(query);
     //if the query is empty prevent the API call
@@ -41,7 +24,6 @@ const SearchBooks = ({ Books, updateShelf }) => {
         return;
       } else {
         //if the search returns books, set the books state to the books array
-
         const filterBooks = books.map((item) => {
           const match = Books.find((item2) => item2.title === item.title);
           if (match !== undefined)
@@ -71,6 +53,7 @@ const SearchBooks = ({ Books, updateShelf }) => {
       return prev.concat(newBook);
     });
   };
+
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -123,7 +106,7 @@ const SearchBooks = ({ Books, updateShelf }) => {
                 <div className="book-authors">
                   {book.authors ? book.authors : ""}
                 </div>
-                <div>{book.exists ? "Exists" : ""}</div>
+                {/* <div>{book.exists ? "Exists" : ""}</div> */}
               </div>
             </li>
           ))}

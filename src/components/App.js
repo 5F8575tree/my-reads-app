@@ -13,6 +13,11 @@ const App = () => {
   const updateShelf = useCallback((book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       setBooks(Books.map((b) => (b.id === book.id ? { ...book, shelf } : b)));
+
+      //if a book has been set to 'none', update it in the Books state
+      if (shelf === "none") {
+        setBooks(Books.filter((b) => b.id !== book.id));
+      }
     });
   }, []);
 
@@ -29,6 +34,7 @@ const App = () => {
     });
   };
   console.log(Books);
+
   return (
     <Routes>
       <Route
