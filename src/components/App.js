@@ -33,7 +33,6 @@ const App = () => {
       setBooks(Books.map((b) => (b.id === book.id ? { ...book, shelf } : b)));
     });
   };
-  console.log(Books);
 
   return (
     <Routes>
