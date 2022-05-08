@@ -3,22 +3,45 @@ import * as BooksAPI from "../services/BooksAPI";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SearchBooks = ({ Books, updateShelf }) => {
+const SearchBooks = ({ Books, updateShelf, updateExistBooks }) => {
+  //we need to set the query state to an empty string
   const [query, setQuery] = useState("");
 
   const [books, setBooks] = useState([]);
 
+  const [booksProps, setBooksProps] = useState(Books);
+
+  //we need a function that checks if the search book is already on a shelf in BooksAPI.getAll()
+  const checkShelf = (book) => {
+    let shelf = "";
+    BooksAPI.getAll().then((books) => {
+      books.forEach((b) => {
+        if (b.id === book.id) {
+          shelf = b.shelf;
+        }
+      });
+      setBooksProps(
+        booksProps.map((b) => (b.id === book.id ? { ...book, shelf } : b))
+      );
+    });
+  };
+
   const handleChange = (query) => {
     setQuery(query);
+    //if the query is empty prevent the API call
     if (query === "") {
       setBooks([]);
       return;
     }
+    //if the query is not empty, run the API call
     BooksAPI.search(query).then((books) => {
+      //if the search returns an error, set the books to an empty array
       if (books.error) {
         setBooks([]);
         return;
       } else {
+        //if the search returns books, set the books state to the books array
+
         const filterBooks = books.map((item) => {
           const match = Books.find((item2) => item2.title === item.title);
           if (match !== undefined)
@@ -26,6 +49,7 @@ const SearchBooks = ({ Books, updateShelf }) => {
           else return { ...item, exists: false };
         });
         setBooks(filterBooks);
+        // console.log(books.map(book => book.authors.toString().toLowerCase().includes(query.toLowerCase())));
       }
     });
   };
@@ -36,6 +60,8 @@ const SearchBooks = ({ Books, updateShelf }) => {
       : books.filter((b) =>
           b.title.toLowerCase().includes(query.toLowerCase())
         );
+
+  // || (b.authors.toString().toLowerCase().includes(query.toLowerCase())));
 
   const updateBooks = (book, e) => {
     updateShelf((prev) => {
@@ -80,7 +106,11 @@ const SearchBooks = ({ Books, updateShelf }) => {
                   <div className="book-shelf-changer">
                     <select
                       defaultValue={book.exists ? book.shelf : ""}
-                      onChange={(e) => updateBooks(book, e)}
+                      onChange={(e) =>
+                        book.exists
+                          ? updateExistBooks(book, e.target.value)
+                          : updateBooks(book, e)
+                      }
                     >
                       <option value="none" disabled>
                         Move to...
@@ -98,6 +128,7 @@ const SearchBooks = ({ Books, updateShelf }) => {
                 <div className="book-authors">
                   {book.authors ? book.authors : ""}
                 </div>
+                <div>{book.exists ? "Exists" : ""}</div>
               </div>
             </li>
           ))}

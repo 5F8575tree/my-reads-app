@@ -5,19 +5,15 @@ import SearchBooks from "../views/SearchBooks";
 import Home from "../views/Home";
 import { Routes, Route } from "react-router-dom";
 
+//TODO: build out the custom hook to replace the changeShelf props that run all the way down.
+
 const App = () => {
   const [Books, setBooks] = useState([]);
 
   const updateShelf = useCallback((book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       setBooks(Books.map((b) => (b.id === book.id ? { ...book, shelf } : b)));
-
-      //if a book has been set to 'none', update it in the Books state
-      if (shelf === "none") {
-        setBooks(Books.filter((b) => b.id !== book.id));
-      }
     });
-    // eslint-disable-next-line
   }, []);
 
   //we need to use the BooksAPI to getAll() the books within a useEffect
@@ -28,11 +24,12 @@ const App = () => {
   }, [updateShelf]);
 
   const updateBooks = (book, shelf) => {
+    console.log("updateExistBooks");
     BooksAPI.update(book, shelf).then(() => {
       setBooks(Books.map((b) => (b.id === book.id ? { ...book, shelf } : b)));
     });
   };
-
+  console.log(Books);
   return (
     <Routes>
       <Route
@@ -42,7 +39,13 @@ const App = () => {
       />
       <Route
         path="/search"
-        element={<SearchBooks Books={Books} updateShelf={setBooks} />}
+        element={
+          <SearchBooks
+            Books={Books}
+            updateShelf={setBooks}
+            updateExistBooks={updateBooks}
+          />
+        }
       />
     </Routes>
   );
