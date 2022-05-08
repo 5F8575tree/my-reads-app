@@ -1,5 +1,5 @@
 import "../styles/App.css";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import * as BooksAPI from "../services/BooksAPI";
 import SearchBooks from "../views/SearchBooks";
 import Home from "../views/Home";
@@ -10,26 +10,19 @@ import { Routes, Route } from "react-router-dom";
 const App = () => {
   const [Books, setBooks] = useState([]);
 
-  const updateShelf = useCallback((book, shelf) => {
+  const updateBooks = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       setBooks(Books.map((b) => (b.id === book.id ? { ...book, shelf } : b)));
     });
-  }, []);
+  };
 
   //we need to use the BooksAPI to getAll() the books within a useEffect
   useEffect(() => {
     BooksAPI.getAll().then((books) => {
       setBooks(books);
     });
-  }, [updateShelf]);
+  }, []);
 
-  const updateBooks = (book, shelf) => {
-    console.log("updateExistBooks");
-    BooksAPI.update(book, shelf).then(() => {
-      setBooks(Books.map((b) => (b.id === book.id ? { ...book, shelf } : b)));
-    });
-  };
-  console.log(Books);
   return (
     <Routes>
       <Route
