@@ -35,8 +35,8 @@ const App = () => {
         element={
           <SearchBooks
             Books={Books}
-            updateShelf={setBooks}
-            updateExistBooks={updateBooks}
+            setHomeBooks={setBooks}
+            updateHomeBooks={updateBooks}
           />
         }
       />

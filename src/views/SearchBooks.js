@@ -3,7 +3,7 @@ import * as BooksAPI from "../services/BooksAPI";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SearchBooks = ({ Books, updateShelf, updateExistBooks }) => {
+const SearchBooks = ({ Books, setHomeBooks, updateHomeBooks }) => {
   //we need to set the query state to an empty string
   const [query, setQuery] = useState("");
 
@@ -44,7 +44,7 @@ const SearchBooks = ({ Books, updateShelf, updateExistBooks }) => {
         );
 
   const updateBooks = (book, e) => {
-    updateShelf((prev) => {
+    setHomeBooks((prev) => {
       const newBook = { ...book, shelf: e.target.value };
       BooksAPI.update(book, e.target.value);
 
@@ -88,7 +88,7 @@ const SearchBooks = ({ Books, updateShelf, updateExistBooks }) => {
                       defaultValue={book.exists ? book.shelf : ""}
                       onChange={(e) =>
                         book.exists
-                          ? updateExistBooks(book, e.target.value)
+                          ? updateHomeBooks(book, e.target.value)
                           : updateBooks(book, e)
                       }
                     >
