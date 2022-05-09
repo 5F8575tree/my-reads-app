@@ -38,11 +38,11 @@ To get started with the app:
     │
     └── components # React components
     │   ├── App.js # The root of the application.
-    │   ├──  Book.js # A single book.
-    │   ├──  Bookshelf.js # A single shelf.
-    │   ├──  BookshelfChanger.js # Changes the bookshelf of a book.
-    │   ├──  BookStateTable.js # A table of books.
-    │   └──  Title.js # The title bar.
+    │   ├── Book.js # A single book.
+    │   ├── Bookshelf.js # A single shelf.
+    │   ├── BookshelfChanger.js # Changes the bookshelf of a book.
+    │   ├── BookStateTable.js # A table of books.
+    │   └── Title.js # The title bar.
     │
     └── services
     │   └── BoooksAPI.js # # A JavaScript API for the provided Udacity backend. Instructions for methods below.
