@@ -16,7 +16,7 @@ const SearchBooks = ({ Books, setHomeBooks, updateHomeBooks }) => {
       setBooks([]);
       return;
     }
-    //if the query is not empty, run the API call
+    //if the query is not empty, run the API call //async await
     BooksAPI.search(query).then((books) => {
       //if the search returns an error, set the books to an empty array
       if (books.error) {
@@ -27,10 +27,10 @@ const SearchBooks = ({ Books, setHomeBooks, updateHomeBooks }) => {
 
         const filterBooks = books.map((item) => {
           const match = Books.find((item2) => item2.title === item.title);
-          if (match !== undefined)
-            return { ...item, shelf: match.shelf, exists: true };
+          if (match) return { ...item, shelf: match.shelf, exists: true };
           else return { ...item, exists: false };
         });
+        // books as parameter and callback function to map over the books
         setBooks(filterBooks);
       }
     });
@@ -70,6 +70,7 @@ const SearchBooks = ({ Books, setHomeBooks, updateHomeBooks }) => {
       <div className="search-books-results">
         <ol className="books-grid">
           {searchResults.map((book) => (
+            // set component and pass props (books)
             <li key={book.id}>
               <div className="book">
                 <div className="book-top">
