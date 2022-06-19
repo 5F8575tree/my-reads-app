@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
 html,
 body,
 .root {
@@ -8,18 +10,26 @@ body {
 }
 body,
 .app {
-  background: white;
+  background: url(https://images.unsplash.com/photo-1522008818026-240ebed561e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)
+    no-repeat;
+  background-size: cover;
+  background-color: rgb(20, 19, 19);
 }
 
 /* main page */
 
 .list-books-title {
-  padding: 10px 0;
-  background: #2e7c31;
-  text-align: center;
+  height: 80px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
 }
 .list-books-title h1 {
-  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  padding-left: 3rem;
   margin: 0;
   color: white;
 }
@@ -27,6 +37,13 @@ body,
 .list-books-content {
   padding: 0 0 80px;
   flex: 1;
+  font-family: "Raleway", sans-serif;
+}
+
+.shelf-title {
+  padding-left: 2rem;
+  margin: 0;
+  color: white;
 }
 
 .bookshelf {
@@ -57,13 +74,18 @@ body,
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  background: #2691d9;
   background-image: url("../assets/icons/add.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   font-size: 0;
+  transition: transform 0.2s ease-in-out;
+}
+
+.open-search .link-button:hover {
+  transform: scale(1.1);
 }
 
 /* search page */
@@ -87,6 +109,9 @@ body,
   font-size: 1.25em;
   border: none;
   outline: none;
+  background: rgb(19, 18, 18);
+  color: rgb(202, 202, 202);
+  font-family: "Raleway", sans-serif;
 }
 
 .close-search {
@@ -95,7 +120,7 @@ body,
   left: 15px;
   width: 50px;
   height: 53px;
-  background: white;
+  background: rgb(19, 18, 18);
   background-image: url("../assets/icons/arrow-back.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -128,7 +153,9 @@ body,
 }
 .book-title,
 .book-authors {
+  font-family: "Raleway", sans-serif;
   font-size: 0.8em;
+  color: white;
 }
 .book-title {
   margin-top: 10px;
@@ -151,13 +178,19 @@ body,
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #2691d9;
   background-image: url("../assets/icons/arrow-drop-down.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: transform 0.1s ease-in-out;
 }
+
+.book-shelf-changer:hover {
+  transform: translate(0px, 4%);
+}
+
 .book-shelf-changer select {
   width: 100%;
   height: 100%;
