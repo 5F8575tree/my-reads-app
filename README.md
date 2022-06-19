@@ -6,6 +6,14 @@ A search function allows the user to search a database by title, and add books f
 
 - [MyReads Project](#myreads-project)
   - [TL;DR](#tldr)
+  - [Screenshots](#screenshots)
+    - [Home Page](#home-page)
+      - [Shelf Button](#shelf-button)
+      - [Search Button](#search-button)
+    - [Search Page](#search-page)
+      - [Search Results](#search-results)
+      - [Result of Selecting a Shelf on the Search Page](#result-of-selecting-a-shelf-on-the-search-page)
+  - [Fully Responsive](#fully-responsive)
   - [File Tree](#file-tree)
   - [Backend Server](#backend-server)
     - [`getAll`](#getall)
@@ -21,6 +29,43 @@ To get started with the app:
 
 - install all project dependencies with `npm install`
 - start the development server with `npm start`
+
+## Screenshots
+
+### Home Page
+
+The home page shows your current selection of books separated into three categories: those you want to read, those you have read, and those you are currently reading. Scroll is required depending on if you have a lot of books or not.
+![Home Page](src/assets/icons/images/screenshot1.jpg)
+
+#### Shelf Button
+
+Each book has a blue dropdown menu attached that allows you to change the shelf of the book you have selected.
+![Shelf Button](src/assets/icons/images/screenshot2.jpg)
+
+#### Search Button
+
+To navigate to the search page you can click a blue button in the bottom left-hand corner of the screen. This button redirects the user to the search page/
+![Search Button](src/assets/icons/images/screenshot3.jpg)
+
+### Search Page
+
+The search page is essentialist, but is user friendly. The user should be drawn to the search bar at the top of the page and click to begin searching for a book.
+![Search Page](src/assets/icons/images/screenshot4.jpg)
+
+#### Search Results
+
+As the user types, the search results are rendered in real time. The search results have a maximum of 20 results, and each book has it's own shelf button.
+![Search Results](src/assets/icons/images/screenshot5.jpg)
+
+#### Result of Selecting a Shelf on the Search Page
+
+The shelf button for each book on the search page will place the book chosen on the coressponding shelf on the home page.
+![Result of Selecting a Shelf on the Search Page](src/assets/icons/images/screenshot6.jpg)
+
+## Fully Responsive
+
+The app is fully responsive, and has a mobile-first design.
+![Fully Responsive](src/assets/icons/images/screenshot7.jpg)
 
 ## File Tree
 
