@@ -62,7 +62,7 @@ As the user types, the search results are rendered in real time. The search resu
 The shelf button for each book on the search page will place the book chosen on the coressponding shelf on the home page.
 ![Result of Selecting a Shelf on the Search Page](src/assets/icons/images/screenshot6.jpg)
 
-## Fully Responsive
+#### Fully Responsive
 
 The app is fully responsive, and has a mobile-first design.
 ![Fully Responsive](src/assets/icons/images/screenshot7.jpg)
