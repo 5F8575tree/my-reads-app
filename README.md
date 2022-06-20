@@ -13,7 +13,7 @@ A search function allows the user to search a database by title, and add books f
     - [Search Page](#search-page)
       - [Search Results](#search-results)
       - [Result of Selecting a Shelf on the Search Page](#result-of-selecting-a-shelf-on-the-search-page)
-  - [Fully Responsive](#fully-responsive)
+    - [Fully Responsive](#fully-responsive)
   - [File Tree](#file-tree)
   - [Backend Server](#backend-server)
     - [`getAll`](#getall)
@@ -65,6 +65,7 @@ The shelf button for each book on the search page will place the book chosen on 
 #### Fully Responsive
 
 The app is fully responsive, and has a mobile-first design.
+
 ![Fully Responsive](src/assets/icons/images/screenshot7.jpg)
 
 ## File Tree
