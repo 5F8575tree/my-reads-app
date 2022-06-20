@@ -45,6 +45,7 @@ Each book has a blue dropdown menu attached that allows you to change the shelf 
 #### Search Button
 
 To navigate to the search page you can click a blue button in the bottom left-hand corner of the screen. This button redirects the user to the search page.
+
 ![Search Button](src/assets/icons/images/screenshot3.jpg)
 
 ### Search Page
